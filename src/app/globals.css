@@ -1,0 +1,30 @@
+@import 'tailwindcss';
+
+@theme {
+  --color-bg-primary: var(--bg-primary);
+  --color-bg-navbar: var(--bg-navbar);
+}
+
+:root {
+  --bg-primary: #fafafa;
+  --bg-navbar: #ffffff;
+}
+
+html {
+  background: var(--bg-primary);
+}
+
+body {
+  font-family: var(--font-outfit), sans-serif;
+  font-weight: 200;
+  font-size: 0.9rem;
+}
+
+::-webkit-scrollbar {
+  display: none;
+}
+
+* {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE/Edge */
+}
