@@ -1,6 +1,8 @@
 import type { Metadata } from 'next';
 import { Outfit } from 'next/font/google';
 
+import { UserProvider } from '@/src/providers/UserContext';
+
 import './globals.css';
 
 const outfit = Outfit({
@@ -21,7 +23,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${outfit.variable} h-full antialiased`}>
-      <body className="flex min-h-full flex-col">{children}</body>
+      <body className="flex min-h-full flex-col">
+        <UserProvider>{children}</UserProvider>
+      </body>
     </html>
   );
 }

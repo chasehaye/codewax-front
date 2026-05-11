@@ -1,12 +1,14 @@
-import Header from '../components/layout/header';
+'use client';
+
+import { useRouter } from 'next/navigation';
+import { useEffect } from 'react';
 
 export default function NotFound() {
-  return (
-    <div className="flex h-screen flex-col">
-      <Header />
-      <div className="flex flex-1 items-center justify-center">
-        <p>Page not found</p>
-      </div>
-    </div>
-  );
+  const router = useRouter();
+
+  useEffect(() => {
+    router.replace('/');
+  }, []);
+
+  return null;
 }

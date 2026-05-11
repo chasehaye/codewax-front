@@ -1,6 +1,6 @@
 export default function AboutSection() {
   return (
-    <section className="bg-bg-navbar mx-auto mt-20 mb-60 w-[80%] rounded-xl p-1 px-2 px-6 py-8 shadow select-none">
+    <section className="bg-bg-navbar mx-auto mt-20 mb-40 w-[80%] rounded-xl p-1 px-2 px-6 py-8 shadow select-none md:w-[50%]">
       <h1 className="ml-2 text-[2rem] font-normal text-gray-700">CodeWax</h1>
 
       <div className="my-4 rounded-md bg-gray-100 p-4 pb-8">
@@ -15,7 +15,7 @@ export default function AboutSection() {
           <path
             strokeLinecap="round"
             strokeLinejoin="round"
-            d="M15.75 9V5.25A2.25 2.25 0 0 0 13.5 3h-6a2.25 2.25 0 0 0-2.25 2.25v13.5A2.25 2.25 0 0 0 7.5 21h6a2.25 2.25 0 0 0 2.25-2.25V15m3 0 3-3m0 0-3-3m3 3H9"
+            d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10"
           />
         </svg>
 
@@ -143,17 +143,17 @@ export default function AboutSection() {
           />
         </svg>
 
-        <h2 className="mb-2 text-sm font-medium text-gray-600">Built with</h2>
+        <h2 className="mt-4 mb-2 text-sm font-medium text-gray-600">
+          Engineering Focus
+        </h2>
 
-        <ul className="space-y-1 text-sm text-gray-700">
-          <li>Next.js</li>
-          <li>React</li>
-          <li>Tailwind CSS</li>
-          <li>TypeScript</li>
-          <li>PostgreSQL</li>
-          <li>Go (GORM)</li>
-          <li>Claude (AI integration)</li>
-        </ul>
+        <p>
+          CodeWax is designed around semantic code understanding, grounded AI
+          responses, and scalable repository ingestion. The platform focuses on
+          helping developers navigate unfamiliar systems faster while keeping AI
+          outputs tied directly to real source code and existing project
+          patterns.
+        </p>
       </div>
     </section>
   );

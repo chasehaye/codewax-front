@@ -1,6 +1,13 @@
+'use client';
 import Link from 'next/link';
 
+import { useUser } from '@/src/providers/UserContext';
+
 export default function Header() {
+  const { user, loading } = useUser();
+  if (loading) {
+    return null;
+  }
   return (
     <header className="sticky top-4 z-50 mx-4 my-2 flex justify-between">
       <Link
@@ -81,23 +88,42 @@ export default function Header() {
       </nav>
 
       <div className="flex items-center justify-center p-1 hover:text-gray-700">
-        <Link href="/profile">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            strokeWidth={1}
-            stroke="currentColor"
-            className="size-5"
-          >
-            <path
+        {user ? (
+          <button>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth={1}
+              stroke="currentColor"
+              className="size-5"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z"
+              />
+            </svg>
+          </button>
+        ) : (
+          <Link href="/auth">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth={1}
               strokeLinecap="round"
               strokeLinejoin="round"
-              d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z"
-            />
-          </svg>
-        </Link>
-        {/* <button>Sign out</button> */}
+            >
+              <path d="m15.5 7.5 2.3 2.3a1 1 0 0 0 1.4 0l2.1-2.1a1 1 0 0 0 0-1.4L19 4" />
+              <path d="m21 2-9.6 9.6" />
+              <circle cx="7.5" cy="15.5" r="5.5" />
+            </svg>
+          </Link>
+        )}
       </div>
     </header>
   );

@@ -1,11 +1,14 @@
-import Header from '@/src/components/layout/header';
+import Header from '@/src/components/layout/Header';
 import AboutSection from '@/src/features/home/AboutSection';
 
-export default function Home() {
+import Footer from '../components/layout/Footer';
+
+export default function HomePage() {
   return (
     <>
       <Header />
       <AboutSection />
+      <Footer />
     </>
   );
 }

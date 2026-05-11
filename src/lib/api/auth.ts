@@ -1,0 +1,23 @@
+import sendRequest from './send-request';
+
+const BASE_URL = '/api/user';
+
+interface UserData {
+  [key: string]: string;
+}
+
+export function signUp(userData: UserData) {
+  return sendRequest(`${BASE_URL}/register`, 'POST', userData);
+}
+
+export function login(userData: UserData) {
+  return sendRequest(`${BASE_URL}/login`, 'POST', userData);
+}
+
+export function logout() {
+  return sendRequest(`${BASE_URL}/logout`, 'POST');
+}
+
+export function getMe() {
+  return sendRequest(`${BASE_URL}/me`);
+}
