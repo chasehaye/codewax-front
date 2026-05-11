@@ -2,13 +2,20 @@
 
 import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
+import { useUser } from '@/src/providers/UserContext';
 
 export default function NotFound() {
   const router = useRouter();
+  const { user, loading } = useUser();
 
   useEffect(() => {
-    router.replace('/');
-  }, []);
+    if (loading) return;
+    if (user) {
+      router.replace('/prompt');
+    } else {
+      router.replace('/');
+    }
+  }, [user, loading, router]);
 
   return null;
 }

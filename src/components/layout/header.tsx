@@ -1,17 +1,20 @@
 'use client';
 import Link from 'next/link';
+import { useState } from 'react';
 
+import ProfileModal from '@/src/features/profile/ProfileModal';
 import { useUser } from '@/src/providers/UserContext';
 
 export default function Header() {
   const { user, loading } = useUser();
+  const [showProfile, setShowProfile] = useState(false);
   if (loading) {
     return null;
   }
   return (
     <header className="sticky top-4 z-50 mx-4 my-2 flex justify-between">
       <Link
-        href="/"
+        href={user ? '/prompt' : '/'}
         className="flex items-center justify-center p-1 hover:text-gray-700"
       >
         <svg
@@ -89,14 +92,14 @@ export default function Header() {
 
       <div className="flex items-center justify-center p-1 hover:text-gray-700">
         {user ? (
-          <button>
+          <button onClick={() => setShowProfile(true)}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
               viewBox="0 0 24 24"
               strokeWidth={1}
               stroke="currentColor"
-              className="size-5"
+              className="size-5 cursor-pointer"
             >
               <path
                 strokeLinecap="round"
@@ -117,6 +120,7 @@ export default function Header() {
               strokeWidth={1}
               strokeLinecap="round"
               strokeLinejoin="round"
+              className="cursor-pointer"
             >
               <path d="m15.5 7.5 2.3 2.3a1 1 0 0 0 1.4 0l2.1-2.1a1 1 0 0 0 0-1.4L19 4" />
               <path d="m21 2-9.6 9.6" />
@@ -125,6 +129,7 @@ export default function Header() {
           </Link>
         )}
       </div>
+      {showProfile && <ProfileModal onClose={() => setShowProfile(false)} />}
     </header>
   );
 }
