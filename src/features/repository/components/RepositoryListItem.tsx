@@ -22,7 +22,7 @@ export default function RepositoryListItem({
             <span className="block overflow-hidden whitespace-nowrap">
               {repository.name}
             </span>
-            <div className="from-bg-navbar absolute inset-y-0 right-0 w-8 bg-gradient-to-l to-transparent" />
+            <div className="from-bg-navbar absolute inset-y-0 right-0 w-8 bg-linear-to-l to-transparent" />
           </div>
           <div></div>
           <span className="shrink-0">{repository.created_at}</span>
@@ -32,7 +32,7 @@ export default function RepositoryListItem({
             <span className="block overflow-hidden whitespace-nowrap">
               {repository.branch}
             </span>
-            <div className="from-bg-navbar absolute inset-y-0 right-0 w-8 bg-gradient-to-l to-transparent" />
+            <div className="from-bg-navbar absolute inset-y-0 right-0 w-8 bg-linear-to-l to-transparent" />
           </div>
           <div></div>
           <span className="shrink-0">{repository.status}</span>
@@ -41,7 +41,7 @@ export default function RepositoryListItem({
           <span className="block overflow-hidden whitespace-nowrap">
             {repository.github_url}
           </span>
-          <div className="from-bg-navbar absolute inset-y-0 right-0 w-8 bg-gradient-to-l to-transparent" />
+          <div className="from-bg-navbar absolute inset-y-0 right-0 w-8 bg-linear-to-l to-transparent" />
         </div>
       </li>
     </ul>

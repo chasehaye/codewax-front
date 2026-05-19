@@ -1,6 +1,6 @@
 export default function AboutSection() {
   return (
-    <section className="bg-bg-navbar mx-auto mt-20 mb-40 w-[80%] rounded-xl p-1 px-2 px-6 py-8 shadow select-none md:w-[50%]">
+    <section className="bg-bg-navbar mx-auto mt-20 mb-40 w-[80%] rounded-xl p-1 px-6 py-8 shadow select-none md:w-[50%]">
       <h1 className="ml-2 text-[2rem] font-normal text-gray-700">CodeWax</h1>
 
       <div className="my-4 rounded-md bg-gray-100 p-4 pb-8">

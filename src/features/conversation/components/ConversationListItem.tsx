@@ -25,7 +25,7 @@ export default function ConversationListItem({
           <span className="block whitespace-nowrap">
             {conversation.title || 'New Conversation'}
           </span>
-          <div className="from-bg-navbar absolute inset-y-0 right-0 w-8 bg-gradient-to-l to-transparent group-hover:from-gray-100" />
+          <div className="from-bg-navbar absolute inset-y-0 right-0 w-8 bg-linear-to-l to-transparent group-hover:from-gray-100" />
         </div>
       </Link>
     </li>
