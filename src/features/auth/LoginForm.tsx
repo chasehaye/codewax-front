@@ -17,21 +17,6 @@ export default function LoginForm() {
   const [error, setError] = useState('');
   const { setUser } = useUser();
 
-  function handleInsufficientPassword(password: string) {
-    const missing = [];
-
-    if (password.length < 8) missing.push('at least 8 characters');
-    if (!/[A-Z]/.test(password)) missing.push('an uppercase letter');
-    if (!/[a-z]/.test(password)) missing.push('a lowercase letter');
-    if (!/\d/.test(password)) missing.push('a number');
-    if (!/[@$!%*?&]/.test(password))
-      missing.push('a special character (@$!%*?&)');
-
-    if (missing.length === 0) return null;
-
-    return missing.map((item) => `Missing: ${item}`).join(', ');
-  }
-
   function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
     setFormData({ ...formData, [e.target.name]: e.target.value });
     setError('');
@@ -52,9 +37,8 @@ export default function LoginForm() {
       });
       setUser(data);
       router.push('/');
-    } catch (err) {
+    } catch {
       setError('Invalid email or password');
-      console.error('Login failed:', err);
     } finally {
       setIsLoading(false);
     }

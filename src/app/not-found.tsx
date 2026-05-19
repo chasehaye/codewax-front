@@ -2,6 +2,7 @@
 
 import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
+
 import { useUser } from '@/src/providers/UserContext';
 
 export default function NotFound() {
@@ -11,7 +12,7 @@ export default function NotFound() {
   useEffect(() => {
     if (loading) return;
     if (user) {
-      router.replace('/prompt');
+      router.replace('/c');
     } else {
       router.replace('/');
     }

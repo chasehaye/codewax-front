@@ -18,7 +18,7 @@ export default function FormField({
   placeholder,
 }: FormFieldProps) {
   return (
-    <div className="flex w-full max-w-sm flex-col gap-1 px-10">
+    <div className="flex w-full max-w-sm flex-col gap-1 px-4">
       <label htmlFor={name} className="text-sm text-gray-700">
         {label}
       </label>
