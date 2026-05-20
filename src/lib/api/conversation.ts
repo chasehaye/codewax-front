@@ -3,7 +3,7 @@ import sendRequest from '../send-request';
 const BASE_URL = '/api';
 
 interface ConversationData {
-  [key: string]: string;
+  repository_ids?: number[];
 }
 
 export function createConversation(conversationData: ConversationData) {

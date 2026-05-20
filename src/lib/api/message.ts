@@ -1,18 +1,22 @@
-import sendRequest from '../send-request';
+import { sendRequestStream } from '../send-request-stream';
 
 const BASE_URL = '/api/conversations';
 
 interface MessageData {
-  [key: string]: string;
+  content: string;
 }
 
 export function createMessage(
   conversationId: number,
-  messageData: MessageData
+  messageData: MessageData,
+  onChunk: (chunk: string) => void,
+  onDone: (data: any) => void
 ) {
-  return sendRequest(
+  return sendRequestStream(
     `${BASE_URL}/${conversationId}/messages`,
     'POST',
-    messageData
+    messageData,
+    onChunk,
+    onDone
   );
 }
