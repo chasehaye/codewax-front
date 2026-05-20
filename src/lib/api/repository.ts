@@ -13,3 +13,11 @@ export function createRepository(repositoryData: RepositoryData) {
 export function listRepositories() {
   return sendRequest(`${BASE_URL}`, 'GET');
 }
+
+export function getRepository(id: number) {
+  return sendRequest(`${BASE_URL}/${id}`, 'GET');
+}
+
+export function deleteRepository(id: number) {
+  return sendRequest(`${BASE_URL}/${id}`, 'DELETE');
+}

@@ -8,10 +8,10 @@ export default function ProjectsPage() {
   return (
     <div className="flex h-screen flex-col">
       <Header />
-      <div>
+      <div className="mt-4 flex justify-center">
         <Link
           href="/projects/add"
-          className="bg-bg-navbar mx-4 mt-2 inline-flex w-60 rounded-xl shadow hover:bg-gray-100"
+          className="bg-bg-navbar mt-2 inline-flex w-60 rounded-xl shadow hover:bg-gray-100"
         >
           <span className="mx-auto">Add a repository +</span>
         </Link>

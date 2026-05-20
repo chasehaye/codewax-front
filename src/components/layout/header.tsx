@@ -14,7 +14,7 @@ export default function Header() {
   return (
     <header className="sticky top-4 z-50 mx-4 my-2 flex justify-between">
       <Link
-        href={user ? '/chat' : '/'}
+        href={user ? '/c' : '/'}
         className="flex items-center justify-center p-1 hover:text-gray-700"
       >
         <svg
