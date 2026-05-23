@@ -1,5 +1,8 @@
 'use client';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
+
+import { useNav } from '@/src/providers/NavContext';
 
 interface Conversation {
   id: number;
@@ -15,10 +18,18 @@ type ConversationListItemProps = {
 export default function ConversationListItem({
   conversation,
 }: ConversationListItemProps) {
+  const { toggle, isOpen } = useNav();
+  const router = useRouter();
+
+  const handleClick = () => {
+    if (isOpen) toggle();
+    router.push(`/c/${conversation.id}`);
+  };
+
   return (
     <li>
-      <Link
-        href={`/c/${conversation.id}`}
+      <button
+        onClick={handleClick}
         className="group block w-full cursor-pointer rounded-lg p-2 text-left hover:bg-gray-100"
       >
         <div className="relative overflow-hidden">
@@ -27,7 +38,7 @@ export default function ConversationListItem({
           </span>
           <div className="from-bg-navbar absolute inset-y-0 right-0 w-8 bg-linear-to-l to-transparent group-hover:from-gray-100" />
         </div>
-      </Link>
+      </button>
     </li>
   );
 }

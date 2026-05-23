@@ -61,7 +61,6 @@ export default function NewConversation() {
         () => {},
         () => router.push(`/c/${conversation.id}`)
       );
-      router.push(`/c/${conversation.id}`);
     } catch {
       setError('Something went wrong, please try again.');
       setLoading(false);
@@ -71,7 +70,7 @@ export default function NewConversation() {
   return (
     <main className="mx-auto flex flex-col justify-center">
       <h2 className="mx-auto mb-2 text-xl">Start a New Conversation!</h2>
-      <div className="bg-bg-navbar flex w-40 flex-col rounded-lg px-4 py-3 shadow md:w-140">
+      <div className="bg-bg-navbar flex w-74 flex-col rounded-lg px-4 py-3 shadow md:w-140">
         <div className="flex items-end">
           <textarea
             ref={ref}

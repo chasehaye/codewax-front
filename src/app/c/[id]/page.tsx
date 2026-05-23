@@ -1,19 +1,23 @@
 'use client';
-import { useState } from 'react';
 
 import Header from '@/src/components/layout/Header';
 import ConversationDetail from '@/src/features/conversation/ConversationDetail';
 import ConversationList from '@/src/features/conversation/ConversationList';
-import NewConversation from '@/src/features/conversation/ConversationNew';
+import { useNav } from '@/src/providers/NavContext';
 
 export default function ConversationDetailPage() {
-  const [showNewChat, setShowNewChat] = useState(false);
+  const { isOpen } = useNav();
+
   return (
     <div className="flex h-screen flex-col">
-      <Header />
+      {!isOpen && <Header />}
       <div className="flex flex-1 overflow-hidden">
-        <ConversationList setShowNewChat={setShowNewChat} />
-        {showNewChat ? <NewConversation /> : <ConversationDetail />}
+        {isOpen && <ConversationList />}
+        <div
+          className={`flex flex-1 overflow-hidden ${isOpen ? 'pointer-events-none blur-sm' : ''}`}
+        >
+          <ConversationDetail />
+        </div>
       </div>
     </div>
   );

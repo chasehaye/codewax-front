@@ -1,7 +1,7 @@
 import type { NextRequest } from 'next/server';
 import { NextResponse } from 'next/server';
 
-const protectedRoutes = ['/chat', '/chats', '/projects', '/projects/add'];
+const protectedRoutes = ['/c', '/projects', '/projects/add'];
 
 export function proxy(request: NextRequest) {
   const token = request.cookies.get('token')?.value;

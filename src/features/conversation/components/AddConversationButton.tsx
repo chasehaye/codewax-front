@@ -1,19 +1,23 @@
 'use client';
 
-type AddConversationButtonProps = {
-  setShowNewChat: (value: boolean) => void;
-};
+import { useRouter } from 'next/navigation';
+import { useNav } from '@/src/providers/NavContext';
 
-export default function AddConversationButton({
-  setShowNewChat,
-}: AddConversationButtonProps) {
+export default function AddConversationButton() {
+  const router = useRouter();
+  const { isOpen, toggle } = useNav();
+
+  const handleClick = () => {
+    if (isOpen) toggle();
+    router.push('/c');
+  };
   return (
     <>
       <button
-        onClick={() => setShowNewChat(true)}
-        className="group w-full cursor-pointer rounded-lg p-2 text-left hover:bg-gray-100"
+        onClick={handleClick}
+        className="group ml-2 w-full cursor-pointer rounded-lg p-2 text-center hover:bg-gray-100"
       >
-        <div className="relative flex overflow-hidden">
+        <div className="relative flex items-center justify-center overflow-hidden">
           <span className="mr-2 block whitespace-nowrap">New Chat</span>
           <svg
             xmlns="http://www.w3.org/2000/svg"

@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { Outfit } from 'next/font/google';
 
+import { NavProvider } from '@/src/providers/NavContext';
 import { UserProvider } from '@/src/providers/UserContext';
 
 import './globals.css';
@@ -24,7 +25,9 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${outfit.variable} h-full antialiased`}>
       <body className="flex min-h-full flex-col">
-        <UserProvider>{children}</UserProvider>
+        <UserProvider>
+          <NavProvider>{children}</NavProvider>
+        </UserProvider>
       </body>
     </html>
   );

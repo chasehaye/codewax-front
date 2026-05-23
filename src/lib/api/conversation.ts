@@ -13,3 +13,7 @@ export function createConversation(conversationData: ConversationData) {
 export function listConversations() {
   return sendRequest(`${BASE_URL}/conversations`, 'GET');
 }
+
+export function getConversation(id: number) {
+  return sendRequest(`${BASE_URL}/conversations/${id}`, 'GET');
+}

@@ -1,5 +1,6 @@
 'use client';
 
+import { useRouter } from 'next/navigation';
 import { createContext, useContext, useEffect, useState } from 'react';
 
 import { getMe, logout } from '@/src/lib/api/auth';
@@ -23,6 +24,7 @@ const UserContext = createContext<UserContextType | null>(null);
 export function UserProvider({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
+  const router = useRouter();
 
   useEffect(() => {
     async function initAuth() {
@@ -47,6 +49,7 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
       await logout();
     } finally {
       setUser(null);
+      router.push('/');
     }
   };
 
