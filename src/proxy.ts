@@ -12,12 +12,13 @@ export function proxy(request: NextRequest) {
   );
 
   const isAuthRoute = pathname.startsWith('/auth');
+  const isRootRoute = pathname === '/';
 
   if (!token && isProtected) {
     return NextResponse.redirect(new URL('/auth', request.url));
   }
 
-  if (token && isAuthRoute) {
+  if (token && (isAuthRoute || isRootRoute)) {
     return NextResponse.redirect(new URL('/prompt', request.url));
   }
 
