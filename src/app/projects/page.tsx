@@ -12,7 +12,7 @@ export default function ProjectsPage() {
     <div className="flex h-screen flex-col">
       {!isOpen && <Header />}
       <div className="mt-20 flex justify-center">
-        {isOpen && <ConversationList setShowNewChat={() => {}} />}
+        {isOpen && <ConversationList />}
         <Link
           href="/projects/add"
           className={`bg-bg-navbar mt-2 inline-flex w-60 rounded-xl shadow hover:bg-gray-100 ${isOpen ? 'pointer-events-none blur-sm' : ''}`}
