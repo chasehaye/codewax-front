@@ -69,6 +69,7 @@ export default function SignUpForm() {
         username: formData.username,
         password: formData.password,
       });
+      console.log(data)
       setUser(data);
       router.push('/c');
     } catch (err) {
