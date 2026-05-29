@@ -28,7 +28,7 @@ jobs:
             npm install
 
             echo "Building PRODUCTION environment..."
-            npm run build:prod
+            npm run build
 
             echo "Reloading site..."
             cd "$ROOT_DIR"
@@ -36,5 +36,3 @@ jobs:
             ./handle_service.sh 1
 
             echo "Deploy complete."
-
-            
