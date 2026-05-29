@@ -30,10 +30,10 @@ jobs:
             echo "Building PRODUCTION environment..."
             npm run build
 
+            PORT=${{ secrets.PORT }} pm2 restart app --update-env || PORT=${{ secrets.PORT }} pm2 start npm --name app -- start
             echo "Reloading site..."
             cd "$ROOT_DIR"
             ./handle_service.sh 0
             ./handle_service.sh 1
 
             echo "Deploy complete."
-            
