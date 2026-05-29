@@ -69,11 +69,8 @@ export default function SignUpForm() {
         username: formData.username,
         password: formData.password,
       });
-      console.log(data)
       setUser(data);
-      console.log("before push")
       router.push('/c');
-      console.log("after push")
     } catch (err) {
       setError('Something went wrong, please try again');
       console.error('Sign in failed:', err);
