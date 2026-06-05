@@ -18,7 +18,11 @@ export function proxy(request: NextRequest) {
     return NextResponse.redirect(new URL('/auth', request.url));
   }
 
-  if (token && (isAuthRoute || isRootRoute)) {
+  if (token && (isAuthRoute)) {
+    return NextResponse.redirect(new URL('/prompt', request.url));
+  }
+
+  if (token && (isRootRoute)) {
     return NextResponse.redirect(new URL('/prompt', request.url));
   }
 
