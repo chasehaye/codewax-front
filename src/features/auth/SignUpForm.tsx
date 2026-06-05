@@ -19,7 +19,7 @@ export default function SignUpForm() {
   const [passwordError, setPasswordError] = useState('');
   const [confirmPasswordError, setConfirmPasswordError] = useState('');
   const [error, setError] = useState('');
-  const { setUser } = useUser();
+  const { setUser, refreshUser } = useUser();
 
   function handleInsufficientPassword(password: string) {
     const missing = [];
@@ -70,7 +70,7 @@ export default function SignUpForm() {
         password: formData.password,
       });
       setUser(data);
-      router.refresh();
+      await refreshUser();
       router.push('/c');
     } catch (err) {
       setError('Something went wrong, please try again');

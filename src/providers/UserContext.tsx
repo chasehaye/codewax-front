@@ -17,6 +17,7 @@ type UserContextType = {
   loading: boolean;
   setUser: React.Dispatch<React.SetStateAction<User | null>>;
   logoutUser: () => Promise<void>;
+  refreshUser: () => Promise<void>;
 };
 
 const UserContext = createContext<UserContextType | null>(null);
@@ -25,6 +26,18 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
   const router = useRouter();
+
+  const refreshUser = async () => {
+    setLoading(true);
+    try {
+      const data = await getMe();
+      if (data) setUser(data);
+    } catch {
+      setUser(null);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   useEffect(() => {
     async function initAuth() {
@@ -61,6 +74,7 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
         admin: user?.is_admin ?? false,
         loading,
         logoutUser,
+        refreshUser,
       }}
     >
       {children}

@@ -15,7 +15,7 @@ export default function LoginForm() {
   });
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
-  const { setUser } = useUser();
+  const { setUser, refreshUser } = useUser();
 
   function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -36,7 +36,7 @@ export default function LoginForm() {
         password: formData.password,
       });
       setUser(data);
-      router.refresh();
+      await refreshUser();
       router.push('/c');
     } catch {
       setError('Invalid email or password');
