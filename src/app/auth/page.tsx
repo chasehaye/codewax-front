@@ -1,30 +1,36 @@
 'use client';
-import { useState } from 'react';
+import { useRouter } from 'next/navigation';
+import { useEffect } from 'react';
 
 import Header from '@/src/components/layout/Header';
-import LoginForm from '@/src/features/auth/LoginForm';
-import SignupForm from '@/src/features/auth/SignUpForm';
+import ConversationList from '@/src/features/conversation/ConversationList';
+import NewConversation from '@/src/features/conversation/ConversationNew';
+import { useNav } from '@/src/providers/NavContext';
+import { useUser } from '@/src/providers/UserContext';
 
-export default function AuthPage() {
-  const [isLogin, setIsLogin] = useState(true);
+export default function GeneralPromptPage() {
+  const { isOpen } = useNav();
+  const { user, loading } = useUser();
+  const router = useRouter();
+
+  useEffect(() => {
+    if (loading) return;
+    if (!user) router.replace('/auth');
+  }, [user, loading, router]);
+
+  if (loading || !user) return null;
+
   return (
     <div className="flex h-screen flex-col">
-      <Header />
-      <section className="flex flex-1 items-center justify-center">
-        <div className="bg-bg-navbar mx-10 flex w-[80%] flex-col items-center gap-4 rounded-xl p-1 px-6 py-8 shadow select-none md:w-100">
-          {isLogin ? <LoginForm /> : <SignupForm />}
-
-          <p className="text-gray-500">
-            {isLogin ? "Don't have an account?" : 'Already have an account?'}
-            <button
-              onClick={() => setIsLogin(!isLogin)}
-              className="ml-1 text-gray-800 underline hover:text-gray-500"
-            >
-              {isLogin ? 'Sign up' : 'Log in'}
-            </button>
-          </p>
+      {!isOpen && <Header />}
+      <div className="flex flex-1 overflow-hidden">
+        {isOpen && <ConversationList />}
+        <div
+          className={`flex flex-1 overflow-hidden ${isOpen ? 'pointer-events-none blur-sm' : ''}`}
+        >
+          <NewConversation />
         </div>
-      </section>
+      </div>
     </div>
   );
 }
