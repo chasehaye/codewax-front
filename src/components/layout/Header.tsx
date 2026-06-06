@@ -80,7 +80,7 @@ export default function Header() {
         )}
       </button>
 
-      <nav className="bg-bg-navbar mx-6 flex w-80 justify-between rounded-md p-1 px-6 shadow-xl">
+      <nav className="absolute left-1/2 -translate-x-1/2 bg-bg-navbar flex w-80 justify-between rounded-md p-1 px-6 shadow-xl">
         <button
           onClick={handleNewChat}
           className="flex w-10 cursor-pointer justify-center rounded-md py-1 hover:bg-gray-100"
