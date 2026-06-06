@@ -36,7 +36,7 @@ export default function LoginForm() {
         password: formData.password,
       });
       setUser(data);
-      router.refresh()
+      router.refresh();
       router.push('/c');
     } catch {
       setError('Invalid email or password');

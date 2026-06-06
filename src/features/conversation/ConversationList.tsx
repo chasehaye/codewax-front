@@ -34,7 +34,10 @@ export default function ConversationList() {
   }, []);
 
   return (
-    <aside className="bg-bg-navbar fixed inset-y-0 left-0 z-50 m-4 flex w-60 flex-col justify-start rounded-xl shadow-2xl">
+    <aside
+      id="sidebar"
+      className="bg-bg-navbar fixed inset-y-0 left-0 z-50 m-4 flex w-60 flex-col justify-start rounded-xl shadow-2xl"
+    >
       <div className="mt-2 mr-4 flex shrink-0">
         <button
           onClick={toggle}

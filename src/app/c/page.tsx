@@ -1,5 +1,4 @@
 'use client';
-import { useRouter } from 'next/navigation';
 
 import Header from '@/src/components/layout/Header';
 import ConversationList from '@/src/features/conversation/ConversationList';
@@ -8,7 +7,7 @@ import { useNav } from '@/src/providers/NavContext';
 
 export default function GeneralPromptPage() {
   const { isOpen } = useNav();
-  const router = useRouter();
+
 
   return (
     <div className="flex h-screen flex-col">

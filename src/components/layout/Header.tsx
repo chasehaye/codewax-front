@@ -34,9 +34,8 @@ export default function Header() {
     <header className="fixed top-4 right-0 left-0 z-100 mx-4 my-2 flex justify-between">
       <button
         onClick={toggle}
-        className="ml-1 flex cursor-pointer items-center justify-center p-1 hover:text-gray-700 w-20"
+        className="mt-1 ml-1 flex cursor-pointer items-center justify-center p-1 hover:text-gray-700"
       >
-
         {user && (
           <>
             {isOpen ? (
@@ -80,7 +79,7 @@ export default function Header() {
         )}
       </button>
 
-      <nav className="absolute left-1/2 -translate-x-1/2 bg-bg-navbar flex w-80 justify-between rounded-md p-1 px-6 shadow-xl">
+      <nav className="bg-bg-navbar absolute left-1/2 flex w-48 -translate-x-1/2 justify-between rounded-md p-1 px-6 shadow-xl md:w-80">
         <button
           onClick={handleNewChat}
           className="flex w-10 cursor-pointer justify-center rounded-md py-1 hover:bg-gray-100"
@@ -142,7 +141,7 @@ export default function Header() {
         </Link>
       </nav>
 
-      <div className="flex items-center justify-center p-1 hover:text-gray-700 w-20">
+      <div className="mt-1 flex items-center justify-center p-1 hover:text-gray-700">
         {user ? (
           <button onClick={() => setShowProfile(true)}>
             <svg

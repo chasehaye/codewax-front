@@ -70,7 +70,7 @@ export default function SignUpForm() {
         password: formData.password,
       });
       setUser(data);
-      router.refresh()
+      router.refresh();
       router.push('/c');
     } catch (err) {
       setError('Something went wrong, please try again');

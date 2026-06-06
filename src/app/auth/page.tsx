@@ -19,12 +19,12 @@ export default function AuthPage() {
             {isLogin ? (
               <>
                 Don't have an account?{' '}
-                <span className="underline cursor-pointer">Sign up</span>
+                <span className="cursor-pointer underline">Sign up</span>
               </>
             ) : (
               <>
                 Already have an account?{' '}
-                <span className="underline cursor-pointer">Log in</span>
+                <span className="cursor-pointer underline">Log in</span>
               </>
             )}
           </button>
