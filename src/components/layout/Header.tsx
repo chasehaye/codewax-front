@@ -34,8 +34,9 @@ export default function Header() {
     <header className="fixed top-4 right-0 left-0 z-100 mx-4 my-2 flex justify-between">
       <button
         onClick={toggle}
-        className="ml-1 flex cursor-pointer items-center justify-center p-1 hover:text-gray-700"
+        className="ml-1 flex cursor-pointer items-center justify-center p-1 hover:text-gray-700 w-20"
       >
+
         {user && (
           <>
             {isOpen ? (
@@ -141,7 +142,7 @@ export default function Header() {
         </Link>
       </nav>
 
-      <div className="flex items-center justify-center p-1 hover:text-gray-700">
+      <div className="flex items-center justify-center p-1 hover:text-gray-700 w-20">
         {user ? (
           <button onClick={() => setShowProfile(true)}>
             <svg

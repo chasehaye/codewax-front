@@ -1,34 +1,33 @@
 'use client';
-import { useRouter } from 'next/navigation';
-import { useEffect } from 'react';
+
+import { useState } from 'react';
 
 import Header from '@/src/components/layout/Header';
-import ConversationList from '@/src/features/conversation/ConversationList';
-import NewConversation from '@/src/features/conversation/ConversationNew';
-import { useNav } from '@/src/providers/NavContext';
-import { useUser } from '@/src/providers/UserContext';
+import LoginForm from '@/src/features/auth/LoginForm';
+import SignUpForm from '@/src/features/auth/SignUpForm';
 
-export default function GeneralPromptPage() {
-  const { isOpen } = useNav();
-  const { user, loading } = useUser();
-  const router = useRouter();
-
-  useEffect(() => {
-    if (loading) return;
-    if (!user) router.replace('/auth');
-  }, [user, loading, router]);
-
-  if (loading || !user) return null;
+export default function AuthPage() {
+  const [isLogin, setIsLogin] = useState(true);
 
   return (
     <div className="flex h-screen flex-col">
-      {!isOpen && <Header />}
-      <div className="flex flex-1 overflow-hidden">
-        {isOpen && <ConversationList />}
-        <div
-          className={`flex flex-1 overflow-hidden ${isOpen ? 'pointer-events-none blur-sm' : ''}`}
-        >
-          <NewConversation />
+      <Header />
+      <div className="flex flex-1 items-center justify-center">
+        <div className="bg-bg-navbar flex flex-col items-center justify-center rounded-2xl p-6 shadow-lg">
+          {isLogin ? <LoginForm /> : <SignUpForm />}
+          <button onClick={() => setIsLogin(!isLogin)} className="pt-2 text-sm">
+            {isLogin ? (
+              <>
+                Don't have an account?{' '}
+                <span className="underline cursor-pointer">Sign up</span>
+              </>
+            ) : (
+              <>
+                Already have an account?{' '}
+                <span className="underline cursor-pointer">Log in</span>
+              </>
+            )}
+          </button>
         </div>
       </div>
     </div>

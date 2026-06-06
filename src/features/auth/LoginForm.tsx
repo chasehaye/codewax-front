@@ -15,7 +15,7 @@ export default function LoginForm() {
   });
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
-  const { setUser, refreshUser } = useUser();
+  const { setUser } = useUser();
 
   function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -36,7 +36,7 @@ export default function LoginForm() {
         password: formData.password,
       });
       setUser(data);
-      await refreshUser();
+      router.refresh()
       router.push('/c');
     } catch {
       setError('Invalid email or password');
@@ -47,7 +47,7 @@ export default function LoginForm() {
 
   return (
     <>
-      <h2 className="text-xl">Log in</h2>
+      <h2 className="text-xl">Log In</h2>
       <form
         onSubmit={handleSubmit}
         className="flex w-full flex-col items-center gap-4"

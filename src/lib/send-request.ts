@@ -32,5 +32,5 @@ export default async function sendRequest(
   const res = await fetch(url, options);
   if (res.ok) return res.json();
   const err = await res.json();
-  throw new Error(err.message || 'Bad Request');
+  throw new Error(err.message || 'error');
 }
