@@ -42,7 +42,9 @@ jobs:
 
             echo "Pulling latest changes and building..."
             cd "$APP_DIR"
-            git pull origin main
+            git fetch origin main
+            git reset --hard origin/main
+            git clean -fd
             npm install
 
             echo "Building PRODUCTION environment..."
