@@ -10,17 +10,35 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Deploy via SSH
-        uses: appleboy/ssh-action@v1.0.3
-        with:
-          host: ${{ secrets.SERVER_HOST }}
-          username: ${{ secrets.SERVER_USER }}
-          key: ${{ secrets.SERVER_SSH_KEY }}
-          script: |
-            set -e
+      - name: Install cloudflared
+        run: |
+          curl -L --output cloudflared.deb \
+            https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-amd64.deb
+          sudo dpkg -i cloudflared.deb
 
-            APP_DIR="${{ secrets.APP_DIR }}"
-            ROOT_DIR="${{ secrets.ROOT_DIR }}"
+      - name: Deploy via SSH
+        env:
+          SERVER_USER: ${{ secrets.SERVER_USER }}
+          SERVER_HOST: ${{ secrets.SERVER_HOST }}
+          SERVER_SSH_KEY: ${{ secrets.SERVER_SSH_KEY }}
+          APP_DIR: ${{ secrets.APP_DIR }}
+          ROOT_DIR: ${{ secrets.ROOT_DIR }}
+        run: |
+          mkdir -p ~/.ssh
+
+          printf '%s\n' "$SERVER_SSH_KEY" > ~/.ssh/deploy_key
+          chmod 600 ~/.ssh/deploy_key
+
+          cat > ~/.ssh/config <<EOF
+          Host $SERVER_HOST
+              User $SERVER_USER
+              IdentityFile ~/.ssh/deploy_key
+              ProxyCommand cloudflared access ssh --hostname %h
+              StrictHostKeyChecking no
+          EOF
+
+          ssh "$SERVER_HOST" <<EOF
+            set -e
 
             echo "Pulling latest changes and building..."
             cd "$APP_DIR"
@@ -29,9 +47,11 @@ jobs:
 
             echo "Building PRODUCTION environment..."
             npm run build && pm2 delete codewax 2>/dev/null; pm2 start npm --name "codewax" -- run start
+
             echo "Reloading site..."
             cd "$ROOT_DIR"
             ./handle_service.sh 0
             ./handle_service.sh 1
 
             echo "Deploy complete."
+          EOF
