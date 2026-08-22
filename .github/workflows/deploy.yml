@@ -37,14 +37,21 @@ jobs:
               StrictHostKeyChecking no
           EOF
 
-          ssh "$SERVER_HOST" <<EOF
+          ssh "$SERVER_HOST" 'bash -s' <<'EOF'
             set -e
+
+            APP_DIR="$APP_DIR"
+            ROOT_DIR="$ROOT_DIR"
 
             echo "Pulling latest changes..."
             cd "$APP_DIR"
             git fetch origin main
             git reset --hard origin/main
             git clean -fd
+
+            echo "Fixing ownership and cleaning previous build cache..."
+            sudo chown -R $(whoami):$(whoami) .next node_modules 2>/dev/null || true
+            rm -rf .next
 
             echo "Installing dependencies..."
             npm ci
