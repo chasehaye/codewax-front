@@ -40,15 +40,21 @@ jobs:
           ssh "$SERVER_HOST" <<EOF
             set -e
 
-            echo "Pulling latest changes and building..."
+            echo "Pulling latest changes..."
             cd "$APP_DIR"
             git fetch origin main
             git reset --hard origin/main
             git clean -fd
-            npm install
+
+            echo "Installing dependencies..."
+            npm ci
 
             echo "Building PRODUCTION environment..."
-            npm run build && pm2 delete codewax 2>/dev/null; pm2 start npm --name "codewax" -- run start
+            npm run build
+
+            echo "Starting application..."
+            pm2 delete codewax 2>/dev/null || true
+            pm2 start npm --name "codewax" -- run start
 
             echo "Reloading site..."
             cd "$ROOT_DIR"
