@@ -48,7 +48,9 @@ jobs:
             npm install
 
             echo "Building PRODUCTION environment..."
-            npm run build && pm2 delete codewax 2>/dev/null; pm2 start npm --name "codewax" -- run start
+            npm run build
+            pm2 delete codewax 2>/dev/null || true
+            pm2 start npm --name "codewax" -- run start
 
             echo "Reloading site..."
             cd "$ROOT_DIR"
