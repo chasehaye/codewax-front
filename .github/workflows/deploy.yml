@@ -22,7 +22,8 @@ jobs:
           SERVER_HOST: ${{ secrets.SERVER_HOST }}
           SERVER_SSH_KEY: ${{ secrets.SERVER_SSH_KEY }}
           APP_DIR: ${{ secrets.APP_DIR }}
-          ROOT_DIR: ${{ secrets.ROOT_DIR }}
+          PORT: ${{ secrets.PORT }}
+          NEXT_PUBLIC_API_URL: ${{ secrets.NEXT_PUBLIC_API_URL }}
         run: |
           mkdir -p ~/.ssh
 
@@ -40,22 +41,21 @@ jobs:
           ssh "$SERVER_HOST" <<EOF
             set -e
 
-            echo "Pulling latest changes and building..."
+            echo "Pulling latest changes..."
             cd "$APP_DIR"
             git fetch origin main
             git reset --hard origin/main
             git clean -fd
-            npm install
 
-            echo "Building PRODUCTION environment..."
-            npm run build
-            pm2 delete codewax 2>/dev/null || true
-            pm2 start npm --name "codewax" -- run start
+            echo "Writing runtime env..."
+            echo "PORT=$PORT" > .env
+            echo "NEXT_PUBLIC_API_URL=$NEXT_PUBLIC_API_URL" >> .env
 
-            echo "Reloading site..."
-            cd "$ROOT_DIR"
-            ./handle_service.sh 0
-            ./handle_service.sh 1
+            echo "Building image and (re)starting container..."
+            docker compose up -d --build
+
+            echo "Pruning dangling images..."
+            docker image prune -f
 
             echo "Deploy complete."
           EOF

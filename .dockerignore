@@ -1,0 +1,13 @@
+# Keep the build context small and avoid copying host artifacts into the image
+node_modules
+.next
+out
+build
+.git
+.github
+*.log
+.env
+.env.local
+.vscode
+.idea
+.DS_Store
